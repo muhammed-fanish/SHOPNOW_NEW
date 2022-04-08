@@ -1,0 +1,398 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+{% if search_products is not None %}
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <div class="section-title">
+                    <h4>Results for <span style="font-family:cursive">"{{q}}"</span></h4>
+                </div>
+            </div>
+        </div>
+        <div class="row property__gallery">
+            {% for pdt in search_products %}
+            <div class="col-lg-4 col-md-4 col-sm-6 mix women">
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" data-setbg="{{ pdt.bannerImage }}">
+                        <ul class="product__hover">
+                            <li><a href="{{ pdt.bannerImage }}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                        </ul>
+                    </div>
+                    <a href="{% url 'web:productDetails' pdt.id %}">
+                        <div class="product__item__text">
+                            <h6 style="font-size:20px;font-weight:bold;text-transform: uppercase;">{{ pdt.name }}</h6>
+                            {% if pdt.star_value == "3"%}
+                                    <div class="rating user-rating">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                  </div>
+                                    {% endif %}
+                                    {% if pdt.star_value == "3.5"%}
+                                    <div class="rating user-rating">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star-half-full"></i>
+                                  </div>
+                                    {% endif %}
+                                    {% if pdt.star_value == "4"%}
+                                    <div class="rating user-rating">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                  </div>
+                                    {% endif %}
+                                    {% if pdt.star_value == "4.5"%}
+                                    <div class="rating user-rating">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star-half-full"></i>
+                                  </div>
+                                    {% endif %}
+                                    {% if pdt.star_value == "5"%}
+                                    <div class="rating user-rating">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                  </div>
+                                    {% endif %}
+                            <div class="product__price"> <span>Rs {{pdt.actual_price}}</span> Rs {{pdt.offer_price}}</div>
+                        </div>
+                    </a>
+                    
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+{% endif %}
+    <!-- Categories Section Begin -->
+    <section class="categories">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 p-0">
+                    <div class="categories__item categories__large__item">
+                        <div class="categories__text">
+                            <h1 style="font-size:30px;color:#007bff">EFUDEX STORE</h1>
+                            <p style="color:#ffff;">Experience The Premium feeling,A Fresh Approch To Shoping</p>
+                            <a href="\myShop">Shop now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Categories Section End -->
+<section class="product-details spad">
+    {% if most_selled_product is not None%}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="section-title">
+                    <h2>BEST SELLING IN THIS SEASON</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="product__details__pic">
+                    <div class="product__details__pic__left product__thumb nice-scroll">
+                        {% for pdt_image in most_selled_product_images %}
+                        <a class="pt active" href="#product-{{ forloop.counter }}">
+                            <img src="{{ pdt_image.image }}" alt="main-image">
+                        </a>
+                        {% endfor %}
+                    </div>
+                    <div class="product__details__slider__content">
+                        <div class="product__details__pic__slider owl-carousel">
+                            {% for pdt_image in most_selled_product_images %}
+                                <a href="{{ pdt_image.image }}" class="MagicZoom" data-options="zoomPosition: inner" style="display:inline-block">
+                                    <img data-hash="product-{{ forloop.counter }}" class="product__big__img" src="{{ pdt_image.image }}" alt="">
+                                </a>
+                            
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="product__details__text">
+                    <h3>{{ most_selled_product.name }}</h3>
+                    {% if most_selled_product.star_value == "3"%}
+                    <div class="rating user-rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                  </div>
+                    {% endif %}
+                    {% if most_selled_product.star_value == "3.5"%}
+                    <div class="rating user-rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-half-full"></i>
+                  </div>
+                    {% endif %}
+                    {% if most_selled_product.star_value == "4"%}
+                    <div class="rating user-rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                  </div>
+                    {% endif %}
+                    {% if most_selled_product.star_value == "4.5"%}
+                    <div class="rating user-rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-half-full"></i>
+                  </div>
+                    {% endif %}
+                    {% if most_selled_product.star_value == "5"%}
+                    <div class="rating user-rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                  </div>
+                    {% endif %}
+                    <span>({{most_selled_product.total_num_of_reviews}} reviews )</span>
+                    <div class="product__details__price offer_pricee " style="font-family: cursive !important;">₹<span class="off_prc product__details__price" style="font-size:30px;text-decoration:None;color:#004aac">{{ most_selled_product.offer_price }}</span> <span class="act_prc">₹ {{ most_selled_product.actual_price }}</span></div>
+                        <div class="product__details__price offer_pricee ">Subtotal : ₹<span class="total_price product__details__price" style="font-size:30px;text-decoration:None;color:#004aac;font-family: cursive !important;">{{ most_selled_product.offer_price }}</div>
+                           
+                               <a href="{% url 'web:productDetails' most_selled_product.id %}" style="color:#004aac">Full details <i class="fa fa-angle-right"></i></a>
+                               <div class="footer__payment">
+                                <a href=""><img src="{% static 'img/payment/payment-1.png' %}" alt=""></a>
+                                <a href=""><img src="{% static 'img/payment/payment-2.png' %}" alt=""></a>
+                                <a href=""><img src="{% static 'img/payment/payment-3.png' %}" alt=""></a>
+                                <a href=""><img src="{% static 'img/payment/payment-4.png' %}" alt=""></a>
+                                <a href=""><img src="{% static 'img/payment/payment-5.png' %}" alt=""></a>
+                            </div>
+                               
+                                
+                    <div class="product__details__button">
+                        <form action="{% url 'web:productDetails' most_selled_product.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="pdtId" value="{{ most_selled_product.id }}">
+                            <div class="quantity">
+                                <span>Quantity:</span>
+                                <div class="pro-qty">
+                                    <input type="text" value="1" name="proQty" >
+                                </div>
+                            </div>
+                            <input type="submit" class="cart-btn" value="Add to cart">
+                            <input type="submit" style="width:100%" class="cart-btn" value="Buy it now">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</section>
+<!-- Product Section Begin -->
+{% if new_products%}
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <div class="section-title">
+                    <h4>New product</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row property__gallery">
+            {% for pdt in new_products %}
+            <div class="col-lg-4 col-md-4 col-sm-6 mix women">
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" data-setbg="{{ pdt.bannerImage }}">
+                        <div class="label new">New</div>
+                        <ul class="product__hover">
+                            <li><a href="{{ pdt.bannerImage }}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                        </ul>
+                    </div>
+                    <a href="{% url 'web:productDetails' pdt.id %}">
+                        <div class="product__item__text">
+                            <h6 style="font-size:20px;font-weight:bold;text-transform: uppercase;">{{ pdt.name }}</h6>
+                            {% if pdt.star_value == "3"%}
+                                    <div class="rating user-rating">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                  </div>
+                                    {% endif %}
+                                    {% if pdt.star_value == "3.5"%}
+                                    <div class="rating user-rating">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star-half-full"></i>
+                                  </div>
+                                    {% endif %}
+                                    {% if pdt.star_value == "4"%}
+                                    <div class="rating user-rating">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                  </div>
+                                    {% endif %}
+                                    {% if pdt.star_value == "4.5"%}
+                                    <div class="rating user-rating">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star-half-full"></i>
+                                  </div>
+                                    {% endif %}
+                                    {% if pdt.star_value == "5"%}
+                                    <div class="rating user-rating">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                  </div>
+                                    {% endif %}
+                            <div class="product__price"> <span>Rs {{pdt.actual_price}}</span> Rs {{pdt.offer_price}}</div>
+                        </div>
+                    </a>
+                    
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+{% endif %}
+<!-- Product Section End -->
+
+<!-- Banner Section Begin -->
+
+<section class="banner">
+    <h3  style="text-align: center;">Testimonials</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-7 col-lg-8 m-auto">
+                <div class="banner__slider owl-carousel">
+                    <div class="banner__item">
+                        <img class="quote-image" width="50px"  src="{% static 'img/testimoni-image1.png'%}" >
+                        <div class="banner__text">
+                            
+                            <p style="font-family:cursive" >I Can Never Think Of Online Shopping On Any Other Platform. I Love The Ease With Which My Products Gets Delivered.</p>
+                            <p>- LUCI -</p>
+                        </div>
+                    </div>
+                    <div class="banner__item">
+                        <div class="banner__text">
+                            <img class="quote-image" src="{% static 'img/testimoni-image2.png'%}">
+                            <p style="font-family:cursive" >Every Order From This Website Has Been An Amazing Experience. Their Site Provides Lots Of Detail So I Know Exactly What I’m Getting And Their Customer Support Is Just Outstanding.</p>
+                            <p>- Jithin -</p>
+                        </div>
+                    </div>
+                    <div class="banner__item">
+                        <div class="banner__text">
+                            <img class="quote-image" src="{% static 'img/testimoni-image3.png'%}">
+                            <p style="font-family:cursive" >One Thing I Like About This Store Is Their Customer Service. They Are Always There For You & Solves Your Issue Pretty Quic</p>
+                            <p>- Krish -</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Banner Section End -->
+
+<!-- Discount Section Begin -->
+<section class="discount">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 p-0 discountt">
+                <div class="discount__text">
+                    <div class="discount__text__title">
+                        <span>Discount</span>
+                        <h2>{% now 'Y' %}</h2>
+                        <h5><span>UP to</span> 50%</h5>
+                    </div>
+                    <div class="discount__countdown" id="countdown-time">
+                        <div class="countdown__item">
+                            <span>22</span>
+                            <p>Days</p>
+                        </div>
+                        <div class="countdown__item">
+                            <span>18</span>
+                            <p>Hour</p>
+                        </div>
+                        <div class="countdown__item">
+                            <span>46</span>
+                            <p>Min</p>
+                        </div>
+                        <div class="countdown__item">
+                            <span>05</span>
+                            <p>Sec</p>
+                        </div>
+                    </div>
+                    <a href="\myShop">Shop now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Discount Section End -->
+
+<!-- Services Section Begin -->
+<section class="services spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <i class="fa fa-car"></i>
+                    <h6>Free Shipping</h6>
+                    <p>For all oder over ₹250</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <i class="fa fa-money"></i>
+                    <h6>Money Back Guarantee</h6>
+                    <p>If good have Problems</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <i class="fa fa-support"></i>
+                    <h6>Online Support 24/7</h6>
+                    <p>Dedicated support</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <i class="fa fa-headphones"></i>
+                    <h6>Payment Secure</h6>
+                    <p>100% secure payment</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Services Section End -->
+<!-- Instagram Begin -->
+<!-- Instagram End -->
+{% endblock %}
+

@@ -1,0 +1,325 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="/"><i class="fa fa-home"></i> Home</a>
+                        <span>{{pdt.name}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Product Details Section Begin -->
+    <section class="product-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="product__details__pic">
+                        <div class="product__details__pic__left product__thumb nice-scroll">
+                            {% for pdt_image in pdt_images %}
+                            <a class="pt active" href="{% url 'web:productDetails' pdt.id %}#product-{{ forloop.counter }}">
+                                <img src="{{ pdt_image.image }}" alt="main-image">
+                            </a>
+                            {% endfor %}
+                        </div>
+                        <div class="product__details__slider__content">
+                            <div class="product__details__pic__slider owl-carousel">
+                                {% for pdt_image in pdt_images %}
+                                    <a href="{{ pdt_image.image }}" class="MagicZoom" data-options="zoomPosition: inner" style="display:inline-block">
+                                        <img data-hash="product-{{ forloop.counter }}" class="product__big__img" src="{{ pdt_image.image }}" alt="">
+                                    </a>
+                                
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="product__details__text">
+                        <h3>{{ pdt.name }}</h3>
+                        <div class="rating">
+                          <a href="#reviews"> 
+                            {% if pdt.star_value == "3"%}
+                                    <div class="rating user-rating">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                  </div>
+                                    {% endif %}
+                                    {% if pdt.star_value == "3.5"%}
+                                    <div class="rating user-rating">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star-half-full"></i>
+                                  </div>
+                                    {% endif %}
+                                    {% if pdt.star_value == "4"%}
+                                    <div class="rating user-rating">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                  </div>
+                                    {% endif %}
+                                    {% if pdt.star_value == "4.5"%}
+                                    <div class="rating user-rating">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star-half-full"></i>
+                                  </div>
+                                    {% endif %}
+                                    {% if pdt.star_value == "5"%}
+                                    <div class="rating user-rating">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                  </div>
+                                    {% endif %}
+                            <span>( {{pdt.total_num_of_reviews}} reviews )</span>
+                          </a>
+                           
+                            
+                            
+                        </div>
+                        <div class="product__details__price offer_pricee " style="font-family: cursive !important;">₹<span class="off_prc product__details__price" style="font-size:30px;text-decoration:None;color:#004aac">{{ pdt.offer_price }}</span> <span class="act_prc">₹ {{ pdt.actual_price }}</span></div>
+                        <div class="product__details__price offer_pricee ">Subtotal : ₹<span class="total_price product__details__price" style="font-size:30px;text-decoration:None;color:#004aac;font-family: cursive !important;">{{ pdt.offer_price }}</div>
+                          <div class="footer__payment">
+                            <a href=""><img src="{% static 'img/payment/payment-1.png' %}" alt=""></a>
+                            <a href=""><img src="{% static 'img/payment/payment-2.png' %}" alt=""></a>
+                            <a href=""><img src="{% static 'img/payment/payment-3.png' %}" alt=""></a>
+                            <a href=""><img src="{% static 'img/payment/payment-4.png' %}" alt=""></a>
+                            <a href=""><img src="{% static 'img/payment/payment-5.png' %}" alt=""></a>
+                        </div>
+                        <div class="product__details__button">
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="pdtId" value="{{ pdt.id }}">
+                                <div class="quantity">
+                                    <span>Quantity:</span>
+                                    <div class="pro-qty">
+                                        <input type="text" value="1" name="proQty" >
+                                    </div>
+                                </div>
+                                <input type="submit" class="cart-btn" value="Add to cart">
+                                <input type="submit" style="width:100%" class="cart-btn" value="Buy it now">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:3%">
+                <div class ="col-lg-5">
+                  {% if pdt.gif_image_url1%}
+                  <p data-mce-fragment="1"><span data-mce-fragment="1"><img data-mce-fragment="1" style="display: block; margin-left: auto; margin-right: auto;" src="{{pdt.gif_image_url1}}" width="400" height="400" data-mce-src="{{pdt.gif_image_url1}}"></span></p> 
+                  {% endif %} 
+                  {% if pdt.gif_image_url2%}
+                  <p data-mce-fragment="1"><span data-mce-fragment="1"><img data-mce-fragment="1" style="display: block; margin-left: auto; margin-right: auto;" src="{{pdt.gif_image_url2}}" width="400" height="400" data-mce-src="{{pdt.gif_image_url2}}"></span></p> 
+                  {% endif %} 
+                  {% if pdt.gif_image_url3%}
+                  <p data-mce-fragment="1"><span data-mce-fragment="1"><img data-mce-fragment="1" style="display: block; margin-left: auto; margin-right: auto;" src="{{pdt.gif_image_url3}}" width="400" height="400" data-mce-src="{{pdt.gif_image_url3}}"></span></p> 
+                  {% endif %} 
+                   
+                    
+                </div>
+                <div class ="col-lg-7">
+                  {{pdt.description | safe}}
+                </div>
+
+                <div class="your-review col-lg-12">
+                    <div class="wrapper">
+                        <div class="master">
+                          <h1 style="color:#fff">Review And rating</h1>
+                          <h2 style="color:#fff">How was your experience about  {{pdt.name}}?</h2>
+                      
+                          <div class="rating-component">
+                            <div class="status-msg">
+                              <label>
+                                              <input  class="rating_msg" type="hidden" name="rating_msg" value=""/>
+                                          </label>
+                            </div>
+                            <div class="stars-box">
+                              <i class="star fa fa-star" title="1 star" data-message="Poor" data-value="1"></i>
+                              <i class="star fa fa-star" title="2 stars" data-message="Too bad" data-value="2"></i>
+                              <i class="star fa fa-star" title="3 stars" data-message="Average quality" data-value="3"></i>
+                              <i class="star fa fa-star" title="4 stars" data-message="Nice" data-value="4"></i>
+                              <i class="star fa fa-star" title="5 stars" data-message="very good qality" data-value="5"></i>
+                            </div>
+                            <div class="starrate">
+                              <label>
+                                              <input  class="ratevalue" type="hidden" name="rate_value" value=""/>
+                                          </label>
+                            </div>
+                          </div>
+                      
+                          <div class="feedback-tags">
+                            <div class="tags-container" data-tag-set="1">
+                              <div class="question-tag">
+                                Why was your experience so bad?
+                              </div>
+                            </div>
+                            <div class="tags-container" data-tag-set="2">
+                              <div class="question-tag">
+                                Why was your experience so bad?
+                              </div>
+                      
+                            </div>
+                      
+                            <div class="tags-container" data-tag-set="3">
+                              <div class="question-tag">
+                                Why was your average rating experience ?
+                              </div>
+                            </div>
+                            <div class="tags-container" data-tag-set="4">
+                              <div class="question-tag">
+                                Why was your experience good?
+                              </div>
+                            </div>
+                      
+                            <div class="tags-container" data-tag-set="5">
+                              <div class="make-compliment">
+                                <div class="compliment-container">
+                                  Give a compliment
+                                  <i class="far fa-smile-wink"></i>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div class="tags-box">
+                              {% comment %} <input type="text" class="tag form-control" name="comment" id="inlineFormInputName" placeholder="please enter your review"> {% endcomment %}
+                              <textarea id="inlineFormInputName" style="resize:none" name="comment" class="tag form-control" rows="4" cols="50" placeholder="please enter your review"></textarea>
+                              <input type="hidden" name="product_id" value="" />
+                            </div>
+                            
+                          </div>
+                      
+                          <div class="button-box" style="margin-bottom: 10px;">
+                            <input type="submit" class=" done btn btn-warning" disabled="disabled" value="Add review" />
+                          </div>
+                      
+                          <div class="submited-box">
+                            <div class="loader"></div>
+                            <div class="success-message" style="color: yellow;">
+                              Thank you!
+                            </div>
+                          </div>
+                        </div>
+                      
+                      </div>
+                </div>
+                <div class="col-lg-12" id="reviews">
+                    <div class="product__details__tab" > 
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="" role="tab">Reviews ({{pdt.total_num_of_reviews}})</a>
+                            </li>
+                        </ul>     
+                    </div>
+                    <div  class="scroll" style="border-radius:10px">
+                        {% for review in prod_reviews %}
+                            <div class="tab-content" >
+                                <div class="tab-pane active " style="margin-bottom: 10px;" id="tabs-1" role="tabpanel">
+                                    <div class="row" style="width:100%">
+                                        <img src = "{% static 'img/profile-user.png' %}" /><span style="padding-top: 5px;
+                                        padding-left: 3px;font-family: monospace;">{{review.name}} <img src="https://areviewsapp.com/img/verified.png" alt="verify">
+                                    </div>
+                                    {% if review.rating == "3"%}
+                                    <div class="rating user-rating">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                  </div>
+                                    {% endif %}
+                                    {% if review.rating == "3.5"%}
+                                    <div class="rating user-rating">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star-half-full"></i>
+                                  </div>
+                                    {% endif %}
+                                    {% if review.rating == "4"%}
+                                    <div class="rating user-rating">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                  </div>
+                                    {% endif %}
+                                    {% if review.rating == "4.5"%}
+                                    <div class="rating user-rating">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star-half-full"></i>
+                                  </div>
+                                    {% endif %}
+                                    {% if review.rating == "5"%}
+                                    <div class="rating user-rating">
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                      <i class="fa fa-star"></i>
+                                  </div>
+                                    {% endif %}
+                                    
+                                    
+                                    <p class="review-text">{{review.description}}</p>
+                                    <div class="review-image">
+                                      {% if review.img1 %}
+                                        <a href="{{ review.img1.url}}" class="image-popup" style="margin-right :3px;display:inline-block"><img src="{{review.img1.url}}" class="cart-img"></a>
+                                      {% endif %}
+                                      {% if review.img2 %}
+                                      <a href="{{ review.img2.url}}" class="image-popup" style="margin-right :3px;display:inline-block"><img src="{{review.img2.url}}" class="cart-img"></a>
+                                      {% endif %}
+                                      {% if review.img3 %}
+                                      <a href="{{ review.img3.url}}" class="image-popup" style="margin-right :3px;display:inline-block"><img src="{{review.img3.url}}" class="cart-img"></a>
+                                      {% endif %}
+                                      {% if review.img4 %}
+                                      <a href="{{ review.img4.url}}" class="image-popup" style="margin-right :3px;display:inline-block"><img src="{{review.img4.url}}" class="cart-img"></a>
+                                      {% endif %}
+                                      {% if review.img5 %}
+                                      <a href="{{ review.img5.url}}" class="image-popup" style="margin-right :3px;display:inline-block"><img src="{{review.img5.url}}" class="cart-img"></a>
+                                      {% endif %}
+                                        
+                                        {% comment %} <img src="{{review.img5.url}}" class="cart-img"> {% endcomment %}
+                                    </div>
+                                    <p style="float:right">{{review.review_duration}}months ago.</p>
+                                    
+                                </div>
+                                
+                            </div>
+                        {% endfor %}
+                        
+
+                        
+                    </div>
+                    
+                   
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Details Section End -->
+
+
+
+
+    
+    
+
+{% endblock %}
+

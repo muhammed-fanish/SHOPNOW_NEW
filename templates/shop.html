@@ -1,0 +1,366 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="/"><i class="fa fa-home"></i> Home</a>
+                        <span>Shop</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+    {% if search_products is not None %}
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4">
+                    <div class="section-title">
+                        <h4>Results for <span style="font-family:cursive">"{{q}}"</span></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row property__gallery">
+                {% for pdt in search_products %}
+                <div class="col-lg-4 col-md-4 col-sm-6 mix women">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="{{ pdt.bannerImage }}">
+                            <ul class="product__hover">
+                                <li><a href="{{ pdt.bannerImage }}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                            </ul>
+                        </div>
+                        <a href="{% url 'web:productDetails' pdt.id %}">
+                            <div class="product__item__text">
+                                <h6 style="font-size:20px;font-weight:bold;text-transform: uppercase;">{{ pdt.name }}</h6>
+                                {% if pdt.star_value == "3"%}
+                                        <div class="rating user-rating">
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                      </div>
+                                        {% endif %}
+                                        {% if pdt.star_value == "3.5"%}
+                                        <div class="rating user-rating">
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star-half-full"></i>
+                                      </div>
+                                        {% endif %}
+                                        {% if pdt.star_value == "4"%}
+                                        <div class="rating user-rating">
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                      </div>
+                                        {% endif %}
+                                        {% if pdt.star_value == "4.5"%}
+                                        <div class="rating user-rating">
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star-half-full"></i>
+                                      </div>
+                                        {% endif %}
+                                        {% if pdt.star_value == "5"%}
+                                        <div class="rating user-rating">
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                      </div>
+                                        {% endif %}
+                                <div class="product__price"> <span>Rs {{pdt.actual_price}}</span> Rs {{pdt.offer_price}}</div>
+                            </div>
+                        </a>
+                        
+                    </div>
+                </div>
+                {% endfor %}
+    
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!-- Shop Section Begin -->
+    <section class="shop spad">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-12 col-md-12">
+                    <div class="row">
+                        {% for prod in products %}
+                        <div class="col-lg-4 col-md-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="{{prod.bannerImage}}">
+                                    <div class="label stockblue">
+                                        <img src="{% static 'img/tag.png' %}">
+                                        SAVE  ₹{{prod.discount_amount}}</div>
+                                    <ul class="product__hover">
+                                        <li><a href="{{ prod.bannerImage }}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                    </ul>
+                                </div>
+                                <a href="{% url 'web:productDetails' prod.id %}">
+                                    <div class="product__item__text">
+                                        <h6 style="font-size:20px;font-weight:bold;text-transform: uppercase;">{{ prod.name }}</h6>
+                                        {% if prod.star_value == "3"%}
+                                        <div class="rating user-rating">
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                      </div>
+                                        {% endif %}
+                                        {% if prod.star_value == "3.5"%}
+                                        <div class="rating user-rating">
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star-half-full"></i>
+                                      </div>
+                                        {% endif %}
+                                        {% if prod.star_value == "4"%}
+                                        <div class="rating user-rating">
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                      </div>
+                                        {% endif %}
+                                        {% if prod.star_value == "4.5"%}
+                                        <div class="rating user-rating">
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star-half-full"></i>
+                                      </div>
+                                        {% endif %}
+                                        {% if prod.star_value == "5"%}
+                                        <div class="rating user-rating">
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                          <i class="fa fa-star"></i>
+                                      </div>
+                                        {% endif %}
+                                        <div class="product__price"> <span>Rs {{prod.actual_price}}</span> Rs {{prod.offer_price}}</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% comment %} <div class="col-lg-4 col-md-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="{% static 'img/shop/shop-2.jpg' %}">
+                                    <ul class="product__hover">
+                                        <li><a href="img/shop/shop-2.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="shop.html#"><span class="icon_heart_alt"></span></a></li>
+                                        <li><a href="shop.html#"><span class="icon_bag_alt"></span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="shop.html#">Flowy striped skirt</a></h6>
+                                    <div class="rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product__price">$ 49.0</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="{% static 'img/shop/shop-3.jpg' %}">
+                                    <ul class="product__hover">
+                                        <li><a href="img/shop/shop-3.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="shop.html#"><span class="icon_heart_alt"></span></a></li>
+                                        <li><a href="shop.html#"><span class="icon_bag_alt"></span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="shop.html#">Croc-effect bag</a></h6>
+                                    <div class="rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product__price">$ 59.0</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="{% static 'img/shop/shop-4.jpg' %}">
+                                    <ul class="product__hover">
+                                        <li><a href="img/shop/shop-4.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="shop.html#"><span class="icon_heart_alt"></span></a></li>
+                                        <li><a href="shop.html#"><span class="icon_bag_alt"></span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="shop.html#">Dark wash Xavi jeans</a></h6>
+                                    <div class="rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product__price">$ 59.0</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="product__item sale">
+                                <div class="product__item__pic set-bg" data-setbg="{% static 'img/shop/shop-5.jpg' %}">
+                                    <div class="label">Sale</div>
+                                    <ul class="product__hover">
+                                        <li><a href="img/shop/shop-5.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="shop.html#"><span class="icon_heart_alt"></span></a></li>
+                                        <li><a href="shop.html#"><span class="icon_bag_alt"></span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="shop.html#">Ankle-cuff sandals</a></h6>
+                                    <div class="rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product__price">$ 49.0 <span>$ 59.0</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="{% static 'img/shop/shop-6.jpg' %}">
+                                    <ul class="product__hover">
+                                        <li><a href="img/shop/shop-6.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="shop.html#"><span class="icon_heart_alt"></span></a></li>
+                                        <li><a href="shop.html#"><span class="icon_bag_alt"></span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="shop.html#">Contrasting sunglasses</a></h6>
+                                    <div class="rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product__price">$ 59.0</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="{% static 'img/shop/shop-7.jpg' %}">
+                                    <ul class="product__hover">
+                                        <li><a href="img/shop/shop-7.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="shop.html#"><span class="icon_heart_alt"></span></a></li>
+                                        <li><a href="shop.html#"><span class="icon_bag_alt"></span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="shop.html#">Circular pendant earrings</a></h6>
+                                    <div class="rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product__price">$ 59.0</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="{% static 'img/shop/shop-8.jpg' %}">
+                                    <div class="label stockout stockblue">Out Of Stock</div>
+                                    <ul class="product__hover">
+                                        <li><a href="img/shop/shop-8.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="shop.html#"><span class="icon_heart_alt"></span></a></li>
+                                        <li><a href="shop.html#"><span class="icon_bag_alt"></span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="shop.html#">Cotton T-Shirt</a></h6>
+                                    <div class="rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product__price">$ 59.0</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="product__item sale">
+                                <div class="product__item__pic set-bg" data-setbg="{% static 'img/shop/shop-9.jpg' %}">
+                                    <div class="label">Sale</div>
+                                    <ul class="product__hover">
+                                        <li><a href="img/shop/shop-9.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="shop.html#"><span class="icon_heart_alt"></span></a></li>
+                                        <li><a href="shop.html#"><span class="icon_bag_alt"></span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="shop.html#">Water resistant zips backpack</a></h6>
+                                    <div class="rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product__price">$ 49.0 <span>$ 59.0</span></div>
+                                </div>
+                            </div>
+                        </div> {% endcomment %}
+                        <div class="col-lg-12 text-center">
+                            <div class="pagination__option">
+                                
+                                {% if products.has_previous%}
+                                {% comment %} <a href="?page=1">1</a> {% endcomment %}
+                                <a href="" class="inactiveLink" ><i class="fa fa-angle-left"></i></a>
+                                <a href="?page={{products.previous_page_number}}">{{products.previous_page_number}}</a>
+                                {% endif %}
+                                <a href="?page={{products.number}}" style="background:#111111;color:#ffffff">{{products.number}}</a>
+                                {% if products.has_next%}
+                                <a href="?page={{products.next_page_number}}">{{products.next_page_number}}</a>
+                                <a href="" class="inactiveLink" ><i class="fa fa-angle-right"></i></a>
+                                {% comment %} <a href="?page={{products.paginator.num_pages}}">{{products.paginator.num_pages}}</a> {% endcomment %}
+                                {% endif %}
+                                <p style="margin-top:5px!important">Page {{ products.number }} of {{products.paginator.num_pages}}</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shop Section End -->
+
+{% endblock %}
